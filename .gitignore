@@ -1,0 +1,6 @@
+.vscode/
+test_maps/
+a.out
+*.o
+*.a
+*.gch
