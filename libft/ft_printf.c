@@ -6,11 +6,11 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 10:50:17 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 16:03:11 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:23:13 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_printf(const char *format, ...)
 {

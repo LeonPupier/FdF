@@ -6,21 +6,11 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:46:45 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 13:23:49 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:22:25 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	idx;
-
-	idx = 0;
-	while (s[idx])
-		idx++;
-	return (idx);
-}
+#include "libft.h"
 
 static int	check_separator(char *str)
 {

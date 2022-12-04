@@ -6,11 +6,11 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:39:40 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 16:03:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:23:40 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_display_arg(char c, va_list ap, int *count)
 {

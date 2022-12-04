@@ -6,34 +6,77 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:01:07 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 15:41:30 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/04 18:34:25 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/fdf.h"
 
-void	draw_line(t_data *img, t_point xy_start, t_point xy_end, int color)
+void	isometric_view(t_map *map, t_point xy)
 {
-	int	x;
-	int	y;
-	int	x_sign;
-	int	y_sign;
+	if (xy.x < SIZEX && xy.y < SIZEY)
+	{
+		xy.x = (xy.x - xy.y) * cos(map->rotation);
+		xy.y = (xy.x + xy.y) * sin(map->rotation) - xy.z;
+		if (xy.x > 0 && xy.y > 0)
+		{
+			if (xy.z == 0)
+				my_mlx_pixel_put(&map->img, xy.x, xy.y, map->color_line);
+			else
+				my_mlx_pixel_put(&map->img, xy.x, xy.y, map->color_focus);
+		}
+	}
+}
 
-	x = xy_start.x;
-	y = xy_start.y;
+void	draw_line(t_map *map, t_point xy_start, t_point xy_end)
+{
+	t_point	xy;
+	int		x_sign;
+	int		y_sign;
+
+	xy.x = xy_start.x;
+	xy.y = xy_start.y;
+	xy.z = xy_start.z;
 	x_sign = 1;
-	if (x > xy_end.x)
+	if (xy.x > xy_end.x)
 		x_sign = -1;
 	y_sign = 1;
-	if (y > xy_end.y)
+	if (xy.y > xy_end.y)
 		y_sign = -1;
-	while (x != xy_end.x)
+	while (xy.y != xy_end.y || xy.x != xy_end.x)
 	{
-		while (y != xy_end.y)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			x += x_sign;
-		}
-		y += y_sign;
+		if (xy.x + x_sign == xy_end.x)
+			xy.x += x_sign;
+		if (xy.y + y_sign == xy_end.y)
+			xy.y += y_sign;
+		if (xy.x != xy_end.x)
+			xy.x += x_sign;
+		if (xy.y != xy_end.y)
+			xy.y += y_sign;
+		isometric_view(map, xy);
+	}
+}
+
+void	draw_bottom_right(t_map *map, int length, int height, t_point xy_start)
+{
+	t_point	xy_end;
+
+	if (length + 1 < map->length)
+	{
+		xy_end.x = xy_start.x + map->space;
+		xy_end.y = xy_start.y;
+		if (map->content[height][length] == 0)
+			draw_line(map, xy_start, xy_end);
+		else
+			draw_line(map, xy_start, xy_end);
+	}
+	if (height + 1 < map->height)
+	{
+		xy_end.x = xy_start.x;
+		xy_end.y = xy_start.y + map->space;
+		if (map->content[height][length] == 0)
+			draw_line(map, xy_start, xy_end);
+		else
+			draw_line(map, xy_start, xy_end);
 	}
 }

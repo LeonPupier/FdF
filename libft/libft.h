@@ -6,22 +6,22 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:58:31 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 16:03:01 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:23:02 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+// Buffer GNL
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
 // Libraires
 # include <stdlib.h>
 # include <unistd.h>
-
-// Get next line
-# include "get_next_line.h"
-
-// Printf
-# include "ft_printf.h"
+# include <stdarg.h>
 
 // Part 1
 int		ft_isalpha(int c);
@@ -77,5 +77,27 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// Get next line functions
+char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin_g(char *s1, char *s2, size_t idx_max);
+char	*ft_strdup(const char *s1);
+char	*recover_before_separator(char *str);
+
+//ft_printf.c
+int		ft_printf(const char *format, ...);
+
+// ft_functions.c
+void	ft_putchar_p(char c, int *count);
+void	ft_putstr_p(char *str, int *count);
+
+// ft_display_arg.c
+void	ft_display_arg(char c, va_list ap, int *count);
+
+// ft_putnbr_base.c
+void	ft_putnbr_base(long long unsigned int nbr, long long unsigned int size,
+			char *base, int *count);
+void	ft_putnbr(int nbr, int *count);
 
 #endif

@@ -1,6 +1,7 @@
 .vscode/
 test_maps/
 a.out
+fdf
 *.o
 *.a
 *.gch

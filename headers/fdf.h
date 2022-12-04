@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:51 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 16:12:56 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/04 18:25:15 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define FDF_H
 
 // Librairies
+# include <math.h>
+# include <fcntl.h>
 # include "../mlx/mlx.h"
+# include "../libft/libft.h"
 
 // Window size (x, y)
 # ifndef SIZEX
@@ -35,10 +38,22 @@
 # define BLUE	0x000000FF
 # define PURPLE	0x00800080
 
+// Key events
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
 // Point structure
 typedef struct s_point {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
+	double		z;
 }	t_point;
 
 // Image structure
@@ -50,10 +65,29 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+// Map informations
+typedef struct s_map {
+	t_data	img;
+	void	*mlx;
+	void	*mlx_win;
+	int		**content;
+	int		length;
+	int		height;
+	int		space;
+	int		color_line;
+	int		color_focus;
+	double	rotation;
+}	t_map;
+
 // fdf.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
+// parser.c
+int		map_parser(t_map *map, char *map_name);
+
 // geometry.c
-void	draw_line(t_data *img, t_point xy_start, t_point xy_end, int color);
+void	isometric_view(t_map *map, t_point xy);
+void	draw_line(t_map *map, t_point xy_start, t_point xy_end);
+void	draw_bottom_right(t_map *map, int length, int height, t_point xy_start);
 
 #endif

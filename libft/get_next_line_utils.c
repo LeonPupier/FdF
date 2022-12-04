@@ -6,31 +6,11 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:47:07 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 13:24:03 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:22:13 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-char	*ft_strdup(const char *s1)
-{
-	size_t	len;
-	size_t	idx;
-	char	*new_s1;
-
-	len = ft_strlen(s1);
-	idx = 0;
-	new_s1 = malloc(sizeof(char) * (len + 1));
-	if (!new_s1)
-		return (NULL);
-	while (idx < len)
-	{
-		new_s1[idx] = s1[idx];
-		idx++;
-	}
-	new_s1[idx] = '\0';
-	return (new_s1);
-}
+#include "libft.h"
 
 static int	loop_join(char *new_str, char *s1, char *s2, size_t idx_max)
 {

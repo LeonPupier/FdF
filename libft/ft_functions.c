@@ -6,11 +6,11 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:34:23 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 16:03:29 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:24:17 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_putchar_p(char c, int *count)
 {

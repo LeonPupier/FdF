@@ -6,52 +6,59 @@
 #    By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by lpupier           #+#    #+#              #
-#    Updated: 2022/12/02 16:13:44 by lpupier          ###   ########.fr        #
+#    Updated: 2022/12/04 17:26:18 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Constants
 NAME		=	fdf
-CFLAGS		=	-Wall -Wextra -Werror
-
-# Window size
-SIZEX		=	1920
-SIZEY		=	1080
+CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g3
 
 # Directories path
 DIR_SRCS	=	sources/
 DIR_HEADERS	=	headers/
 DIR_LIBFT	=	libft/
 DIR_PRINFT	=	ft_printf/
+DIR_MLX		=	mlx/
 
 # Files path
 HEADERS	=	$(DIR_HEADERS)fdf.h \
-			$(DIR_HEADERS)fdf.h \
 			$(DIR_LIBFT)libft.h \
+			$(DIR_LIBFT)ft_printf.h \
+			$(DIR_LIBFT)get_next_line.h \
 
 SRCS	=	$(DIR_SRCS)fdf.c \
+			$(DIR_SRCS)parser.c \
 			$(DIR_SRCS)geometry.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
 # Rules
-.PHONY :	all re clean fclean mickey
+.PHONY :	all re clean fclean libft mlx mickey
 
 all :		${NAME}
 
 %.o: %.c	$(HEADERS) Makefile
-			$(CC) $(CFLAGS) -D SIZEX=$(SIZEX) -D SIZEY=$(SIZEY) -Imlx -c $< -o $@
+			$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
-${NAME}:	${OBJS}
-			$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+${NAME}:	mlx libft ${OBJS}
+			$(CC) $(CFLAGS) $(OBJS) $(DIR_LIBFT)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean :
 			${RM} ${OBJS}
+			make clean -C $(DIR_LIBFT)
 
 fclean :	clean
 			${RM} ${NAME} 
+			make fclean -C $(DIR_LIBFT)
 
 re :		fclean all
+
+libft:
+	make -C $(DIR_LIBFT)
+
+mlx:
+	make -C $(DIR_MLX)
 
 mickey:
 			@echo "$$MICKEY"

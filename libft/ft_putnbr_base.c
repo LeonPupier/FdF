@@ -6,11 +6,11 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:20:22 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/02 16:05:00 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:23:21 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 #include <limits.h>
 
 void	ft_putnbr_base(long long unsigned int nbr, long long unsigned int size,

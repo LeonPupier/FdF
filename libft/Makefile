@@ -1,7 +1,10 @@
 NAME	=	libft.a
 CFLAGS	=	-Wall -Wextra -Werror
 
-HEADERS	=	libft.h
+HEADERS	=	libft.h \
+			get_next_line.h \
+			ft_printf.h \
+
 SRCS	=	ft_isascii.c \
 			ft_memcpy.c \
 			ft_strjoin.c \
@@ -55,7 +58,6 @@ SRCS	=	ft_isascii.c \
 OBJS	=	$(SRCS:.c=.o)
 
 all:		$(NAME)
-
 
 $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
