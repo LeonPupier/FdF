@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:01:07 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/04 18:34:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/05 15:17:35 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	isometric_view(t_map *map, t_point xy)
 	{
 		xy.x = (xy.x - xy.y) * cos(map->rotation);
 		xy.y = (xy.x + xy.y) * sin(map->rotation) - xy.z;
-		if (xy.x > 0 && xy.y > 0)
+		if (map->xy_gap.x + xy.x > 0 && map->xy_gap.y + xy.y > 0 \
+			&& map->xy_gap.x + xy.x < SIZEX && map->xy_gap.y + xy.y < SIZEY)
 		{
 			if (xy.z == 0)
-				my_mlx_pixel_put(&map->img, xy.x, xy.y, map->color_line);
+				my_mlx_pixel_put(&map->img, map->xy_gap.x + xy.x, \
+					map->xy_gap.y + xy.y, map->color_line);
 			else
-				my_mlx_pixel_put(&map->img, xy.x, xy.y, map->color_focus);
+				my_mlx_pixel_put(&map->img, map->xy_gap.x + xy.x, \
+					map->xy_gap.y + xy.y, map->color_focus);
 		}
 	}
 }

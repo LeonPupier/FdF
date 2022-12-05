@@ -3,7 +3,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 HEADERS	=	libft.h \
 			get_next_line.h \
-			ft_printf.h \
+			ft_printf.h
 
 SRCS	=	ft_isascii.c \
 			ft_memcpy.c \
@@ -53,7 +53,7 @@ SRCS	=	ft_isascii.c \
 			ft_printf.c \
 			ft_functions.c \
 			ft_display_arg.c \
-			ft_putnbr_base.c \
+			ft_putnbr_base.c
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -63,7 +63,7 @@ $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
 
 %.o: %.c $(HEADERS) Makefile
-			$(CC) $(CFLAGS) -c $< -o $@ -I .
+			$(CC) $(CFLAGS) -g3 -c $< -o $@ -I .
 
 clean:
 			rm -rf $(OBJS)

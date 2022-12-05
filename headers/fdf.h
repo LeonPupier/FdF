@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:51 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/04 18:25:15 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/05 15:07:40 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,13 @@ typedef struct s_map {
 	int		color_line;
 	int		color_focus;
 	double	rotation;
+	t_point	xy_gap;
 }	t_map;
 
 // fdf.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		render_next_frame(t_map *map);
+void	draw_map(t_map *map);
 
 // parser.c
 int		map_parser(t_map *map, char *map_name);
@@ -89,5 +92,9 @@ int		map_parser(t_map *map, char *map_name);
 void	isometric_view(t_map *map, t_point xy);
 void	draw_line(t_map *map, t_point xy_start, t_point xy_end);
 void	draw_bottom_right(t_map *map, int length, int height, t_point xy_start);
+
+// events.c
+int		quit_window(t_map *map);
+int		check_keycode(int keycode, t_map *map);
 
 #endif
