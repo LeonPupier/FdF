@@ -6,57 +6,65 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:01:07 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/05 15:17:35 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/12 08:13:24 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/fdf.h"
 
-void	isometric_view(t_map *map, t_point xy)
+static int	color_gradient(t_map *map, int z_start, int z_end)
 {
-	if (xy.x < SIZEX && xy.y < SIZEY)
-	{
-		xy.x = (xy.x - xy.y) * cos(map->rotation);
-		xy.y = (xy.x + xy.y) * sin(map->rotation) - xy.z;
-		if (map->xy_gap.x + xy.x > 0 && map->xy_gap.y + xy.y > 0 \
-			&& map->xy_gap.x + xy.x < SIZEX && map->xy_gap.y + xy.y < SIZEY)
-		{
-			if (xy.z == 0)
-				my_mlx_pixel_put(&map->img, map->xy_gap.x + xy.x, \
-					map->xy_gap.y + xy.y, map->color_line);
-			else
-				my_mlx_pixel_put(&map->img, map->xy_gap.x + xy.x, \
-					map->xy_gap.y + xy.y, map->color_focus);
-		}
-	}
+	int	z;
+
+	if (z_start >= z_end)
+		z = z_start;
+	else
+		z = z_end;
+	z *= map->zoom_height;
+	if (z > 100)
+		return (WHITE);
+	else if (z > 50)
+		return (BROWN);
+	else if (z > 25)
+		return (BROWN_DARK);
+	else if (z > 5)
+		return (GREEN_DARK);
+	else if (z > 0)
+		return (GREEN);
+	return (BLUE);
+}
+
+void	isometric_view(t_map *map, t_point *xy)
+{
+	xy->x = (xy->x - xy->y) * cos(map->rotation / 3);
+	if (xy->z != 0)
+		xy->y = (xy->x + xy->y) * sin(map->rotation / 6) \
+			- ((xy->z * map->zoom_height) / 11) * map->space;
+	else
+		xy->y = (xy->x + xy->y) * sin(map->rotation / 6) \
+			- (xy->z / 11) * map->space;
 }
 
 void	draw_line(t_map *map, t_point xy_start, t_point xy_end)
 {
-	t_point	xy;
-	int		x_sign;
-	int		y_sign;
+	double	delta_x;
+	double	delta_y;
+	int		pixels;
 
-	xy.x = xy_start.x;
-	xy.y = xy_start.y;
-	xy.z = xy_start.z;
-	x_sign = 1;
-	if (xy.x > xy_end.x)
-		x_sign = -1;
-	y_sign = 1;
-	if (xy.y > xy_end.y)
-		y_sign = -1;
-	while (xy.y != xy_end.y || xy.x != xy_end.x)
+	isometric_view(map, &xy_start);
+	isometric_view(map, &xy_end);
+	delta_x = (xy_end.x - xy_start.x);
+	delta_y = (xy_end.y - xy_start.y);
+	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	delta_x /= pixels;
+	delta_y /= pixels;
+	while (pixels--)
 	{
-		if (xy.x + x_sign == xy_end.x)
-			xy.x += x_sign;
-		if (xy.y + y_sign == xy_end.y)
-			xy.y += y_sign;
-		if (xy.x != xy_end.x)
-			xy.x += x_sign;
-		if (xy.y != xy_end.y)
-			xy.y += y_sign;
-		isometric_view(map, xy);
+		pixel_put(&map->img, xy_start.x + map->xy_gap.x + (SIZEX / 2), \
+		xy_start.y + map->xy_gap.y + (SIZEY / 2), \
+		color_gradient(map, xy_start.z, xy_end.z));
+		xy_start.x += delta_x;
+		xy_start.y += delta_y;
 	}
 }
 
@@ -68,18 +76,12 @@ void	draw_bottom_right(t_map *map, int length, int height, t_point xy_start)
 	{
 		xy_end.x = xy_start.x + map->space;
 		xy_end.y = xy_start.y;
-		if (map->content[height][length] == 0)
-			draw_line(map, xy_start, xy_end);
-		else
-			draw_line(map, xy_start, xy_end);
+		draw_line(map, xy_start, xy_end);
 	}
 	if (height + 1 < map->height)
 	{
 		xy_end.x = xy_start.x;
 		xy_end.y = xy_start.y + map->space;
-		if (map->content[height][length] == 0)
-			draw_line(map, xy_start, xy_end);
-		else
-			draw_line(map, xy_start, xy_end);
+		draw_line(map, xy_start, xy_end);
 	}
 }

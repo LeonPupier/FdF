@@ -6,13 +6,13 @@
 #    By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by lpupier           #+#    #+#              #
-#    Updated: 2022/12/05 14:01:42 by lpupier          ###   ########.fr        #
+#    Updated: 2022/12/09 14:06:35 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Constants
 NAME		=	fdf
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g3
 
 # Directories path
 DIR_SRCS	=	sources/
@@ -27,7 +27,8 @@ HEADERS	=	$(DIR_HEADERS)fdf.h \
 			$(DIR_LIBFT)ft_printf.h \
 			$(DIR_LIBFT)get_next_line.h
 
-SRCS	=	$(DIR_SRCS)fdf.c \
+SRCS	=	$(DIR_SRCS)main.c \
+			$(DIR_SRCS)map.c \
 			$(DIR_SRCS)parser.c \
 			$(DIR_SRCS)geometry.c \
 			$(DIR_SRCS)events.c

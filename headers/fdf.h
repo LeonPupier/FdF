@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:51 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/05 15:07:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/09 17:11:04 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@
 # endif
 
 // Colors
-# define WHITE	0x00FFFFFF
-# define GREY	0x00808080
-# define BLACK	0x00000000
-# define RED	0x00FF0000
-# define YELLOW	0x00FFFF00
-# define GREEN	0x00008000
-# define BLUE	0x000000FF
-# define PURPLE	0x00800080
+# define WHITE		0x00FFFFFF
+# define GREY		0x00808080
+# define BLACK		0x00000000
+# define BROWN		0x00C47B1E
+# define BROWN_DARK	0x007B4B0D
+# define RED		0x00FF0000
+# define YELLOW		0x00FFFF00
+# define GREEN		0x00008000
+# define GREEN_DARK	0x00175912
+# define BLUE		0x000000FF
+# define PURPLE		0x00800080
 
 // Key events
 enum {
@@ -63,6 +66,8 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		w;
+	int		h;
 }	t_data;
 
 // Map informations
@@ -74,14 +79,19 @@ typedef struct s_map {
 	int		length;
 	int		height;
 	int		space;
-	int		color_line;
-	int		color_focus;
+	int		wtf_mode;
+	int		wtf_count;
 	double	rotation;
+	double	zoom_height;
 	t_point	xy_gap;
 }	t_map;
 
-// fdf.c
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+// main.c
+int		main(int argc, char **argv);
+
+// map.c
+void	pixel_put(t_data *data, int x, int y, int color);
+void	init_map(t_map *map);
 int		render_next_frame(t_map *map);
 void	draw_map(t_map *map);
 
@@ -89,12 +99,12 @@ void	draw_map(t_map *map);
 int		map_parser(t_map *map, char *map_name);
 
 // geometry.c
-void	isometric_view(t_map *map, t_point xy);
+void	isometric_view(t_map *map, t_point *xy);
 void	draw_line(t_map *map, t_point xy_start, t_point xy_end);
-void	draw_bottom_right(t_map *map, int length, int height, t_point xy_start);
 
 // events.c
 int		quit_window(t_map *map);
+void	display_text(t_map *map, int x, int y, char *text);
 int		check_keycode(int keycode, t_map *map);
 
 #endif
