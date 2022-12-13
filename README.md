@@ -50,5 +50,6 @@ Similarly with a cliff by the sea:
 - Rendering colors are based on the height of the point in question. The colors were chosen arbitrarily to work in priority with an earthly representation of a terrain such as a country.
 - Rendering is completely frame-by-frame to prevent visual artifacts from progressive writing on the window.
 - A badly formatted map will display no visual rendering. The program will not stop unexpectedly but will trigger a warning for you.
+- A logging of events related to the map and the management of the graphic window is visible live in the console.
 
 ##### See you soon for new projects, Léon ;)
