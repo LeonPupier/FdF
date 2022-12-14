@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:02:25 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/09 17:02:52 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/12 09:31:06 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,8 @@ int	render_next_frame(t_map *map)
 	draw_map(map);
 	mlx_put_image_to_window(map->mlx, map->mlx_win, map->img.img, 0, 0);
 	if (map->wtf_mode && map->wtf_count > 2 && map->wtf_count < 7)
-	{
 		mlx_string_put(map->mlx, map->mlx_win, SIZEX / 2 - 110, 0, RED, \
 		"!! WTF MODE ACTIVED !!");
-	}
 	if (map->wtf_count == 10)
 		map->wtf_count = 0;
 	map->wtf_count += 1;

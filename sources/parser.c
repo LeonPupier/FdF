@@ -6,81 +6,39 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 13:54:57 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/05 10:32:33 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/14 09:44:35 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/fdf.h"
 
-static void	free_tab_str(char **tab)
-{
-	int	idx;
-
-	idx = 0;
-	while (tab[idx])
-	{
-		free(tab[idx]);
-		idx++;
-	}
-	free(tab);
-}
-
 static int	count_line_column(t_map *map, char *map_name)
 {
 	int		fd;
-	int		idx_tab;
-	char	*line;
-	char	**tab;
+	int		temp_count;
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	map->height = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			return (free(line), close(fd), 1);
-		map->height += 1;
-		tab = ft_split(line, ' ');
-		free(line);
-		idx_tab = 0;
-		while (tab[idx_tab])
-			idx_tab++;
-		free_tab_str(tab);
-		map->length = idx_tab;
-	}
+	temp_count = -1;
+	if (loop_count(map, fd, temp_count) == 0)
+		return (0);
 	close(fd);
 	return (1);
 }
 
-static void	recover_tab(t_map *map, char *map_name)
+static int	recover_tab(t_map *map, char *map_name)
 {
 	int		fd;
-	int		idx_tab;
-	int		idx_line;
-	char	*line;
-	char	**tab;
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		return ;
-	idx_line = 0;
-	idx_tab = 0;
-	while (idx_line < map->height)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		tab = ft_split(line, ' ');
-		idx_tab = -1;
-		while (tab[++idx_tab])
-			map->content[idx_line][idx_tab] = ft_atoi(tab[idx_tab]);
-		free(line);
-		free_tab_str(tab);
-		idx_line += 1;
-	}
+		return (0);
+	if (loop_recover_tab(map, fd) == 0)
+		return (0);
 	close(fd);
+	return (1);
 }
 
 int	map_parser(t_map *map, char *map_name)
@@ -101,8 +59,12 @@ int	map_parser(t_map *map, char *map_name)
 			idx++;
 		}
 		recover_tab(map, map_name);
+		ft_printf("\033[32m[INFO]\033[00m	The map has been correctly loaded.\n");
 		return (1);
 	}
 	else
-		return (0);
+	{
+		ft_printf("\033[31m[ERROR]\033[00m	The map encountered a problem.\n");
+		exit(1);
+	}
 }

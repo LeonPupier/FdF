@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:30:44 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/09 17:01:54 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/12 10:06:46 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	quit_window(t_map *map)
 		free(map->content[idx]);
 	free(map->content);
 	mlx_destroy_image(map->mlx, map->img.img);
+	ft_printf("\033[32m[INFO]\033[00m	Destruction of the image: OK.\n");
 	mlx_destroy_window(map->mlx, map->mlx_win);
+	ft_printf("\033[32m[INFO]\033[00m	Destruction of the window: OK.\n");
+	ft_printf("\033[07m[LOGS]  End of program execution.\033[00m\n");
 	exit(0);
 	return (0);
 }

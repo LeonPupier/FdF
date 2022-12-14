@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:51 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/09 17:11:04 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/14 09:44:21 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,10 @@ void	draw_line(t_map *map, t_point xy_start, t_point xy_end);
 int		quit_window(t_map *map);
 void	display_text(t_map *map, int x, int y, char *text);
 int		check_keycode(int keycode, t_map *map);
+
+// utils.c
+void	free_tab_str(char **tab);
+int		loop_recover_tab(t_map *map, int fd);
+int		loop_count(t_map *map, int fd, int temp_count);
 
 #endif
