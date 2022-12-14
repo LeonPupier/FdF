@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:01:07 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/12 08:13:24 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/14 10:29:33 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	draw_line(t_map *map, t_point xy_start, t_point xy_end)
 	delta_y /= pixels;
 	while (pixels--)
 	{
-		pixel_put(&map->img, xy_start.x + map->xy_gap.x + (SIZEX / 2), \
-		xy_start.y + map->xy_gap.y + (SIZEY / 2), \
-		color_gradient(map, xy_start.z, xy_end.z));
+		pixel_put(&map->img, xy_start.x + map->xy_gap.x - map->xy_zoom.x \
+		+ (SIZEX / 2), xy_start.y + map->xy_gap.y - map->xy_zoom.y + \
+		(SIZEY / 2), color_gradient(map, xy_start.z, xy_end.z));
 		xy_start.x += delta_x;
 		xy_start.y += delta_y;
 	}

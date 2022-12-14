@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:16:12 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/12 10:26:55 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/14 11:02:04 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 	map.space = 30;
 	mlx_hook(map.mlx_win, ON_DESTROY, 0, &quit_window, &map);
 	mlx_hook(map.mlx_win, ON_KEYDOWN, 27, &check_keycode, &map);
+	mlx_hook(map.mlx_win, ON_MOUSEDOWN, 27, &check_keycode_mouse, &map);
 	mlx_loop_hook(map.mlx, render_next_frame, &map);
 	ft_printf("\033[32m[INFO]\033[00m	Display of the window to the user.\n");
 	mlx_loop(map.mlx);

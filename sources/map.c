@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:02:25 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/12 09:31:06 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/14 10:23:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	init_map(t_map *map)
 	map->zoom_height = 1;
 	map->wtf_mode = 0;
 	map->wtf_count = 0;
+	map->xy_zoom.x = 0;
+	map->xy_zoom.y = 0;
 }
 
 void	check_line(t_map *map, int x, int y)

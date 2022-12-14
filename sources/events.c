@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 08:30:44 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/12 10:06:46 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/14 11:05:59 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,40 @@ int	check_keycode(int key_code, t_map *map)
 	else if (key_code == 84)
 		map->zoom_height += 0.1;
 	else if (key_code == 83 && map->space < 100)
-		map->space += 1;
+		map->space += 2;
 	else if (key_code == 82 && map->space > 2)
-		map->space -= 1;
+		map->space -= 2;
 	else if (key_code == 13)
 		map->wtf_mode = 1;
 	else if (key_code == 12)
 		map->wtf_mode = 0;
+	return (0);
+}
+
+int	check_keycode_mouse(int key_code, int x, int y, t_map *map)
+{
+	if (key_code == 1)
+	{
+		map->xy_gap.x -= x - (SIZEX / 2);
+		map->xy_gap.y -= y - (SIZEY / 2);
+	}
+	else if (key_code == 2)
+	{
+		map->xy_zoom.x = 0;
+		map->xy_zoom.y = 0;
+		map->space = 30;
+	}
+	else if (key_code == 5 && map->space < 100)
+	{
+		map->xy_zoom.x += x - (SIZEX / 2);
+		map->xy_zoom.y += y - (SIZEY / 2);
+		map->space += 2;
+	}
+	else if (key_code == 4 && map->space > 2)
+	{
+		map->xy_zoom.x += x - (SIZEX / 2);
+		map->xy_zoom.y += y - (SIZEY / 2);
+		map->space -= 2;
+	}
 	return (0);
 }
