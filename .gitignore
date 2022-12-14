@@ -1,4 +1,6 @@
 .vscode/
+test_maps/
+README.md
 a.out
 main.c
 fdf
