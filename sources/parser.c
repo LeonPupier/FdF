@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 13:54:57 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/14 10:25:47 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/15 13:32:39 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	map_parser(t_map *map, char *map_name)
 		{
 			map->content[idx] = malloc(sizeof(int) * map->length);
 			if (map->content[idx] == NULL)
-				return (0);
+				return (free_tab_int(map->content), 0);
 			idx++;
 		}
 		recover_tab(map, map_name);

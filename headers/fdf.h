@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:58:51 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/14 11:01:57 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/15 13:46:31 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int		check_keycode_mouse(int key_code, int x, int y, t_map *map);
 
 // utils.c
 void	free_tab_str(char **tab);
+void	free_tab_int(int **tab);
 int		loop_recover_tab(t_map *map, int fd);
 int		loop_count(t_map *map, int fd, int temp_count);
 

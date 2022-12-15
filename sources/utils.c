@@ -6,13 +6,26 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 08:22:57 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/14 09:44:45 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/15 13:46:27 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/fdf.h"
 
 void	free_tab_str(char **tab)
+{
+	int	idx;
+
+	idx = 0;
+	while (tab[idx])
+	{
+		free(tab[idx]);
+		idx++;
+	}
+	free(tab);
+}
+
+void	free_tab_int(int **tab)
 {
 	int	idx;
 
@@ -66,13 +79,13 @@ int	loop_count(t_map *map, int fd, int temp_count)
 		tab = ft_split(line, ' ');
 		free(line);
 		if (tab == NULL)
-			return (close(fd), 0);
+			return (free_tab_str(tab), close(fd), 0);
 		map->height += 1;
 		idx_tab = 0;
 		while (tab[idx_tab])
 			idx_tab++;
 		if (idx_tab != temp_count && temp_count != -1)
-			return (close(fd), 0);
+			return (free_tab_str(tab), close(fd), 0);
 		temp_count = idx_tab;
 		map->length = idx_tab;
 		free_tab_str(tab);
