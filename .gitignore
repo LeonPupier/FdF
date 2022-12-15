@@ -1,8 +1,8 @@
 .vscode/
 test_maps/
 README.md
+generator_map.c
 a.out
-main.c
 fdf
 *.o
 *.a
