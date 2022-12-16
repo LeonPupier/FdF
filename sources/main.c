@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:16:12 by lpupier           #+#    #+#             */
-/*   Updated: 2022/12/15 13:44:51 by lpupier          ###   ########.fr       */
+/*   Updated: 2022/12/16 08:36:56 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	ft_printf("\033[07m[LOGS]  Display of the execution report:\033[00m\n");
 	init_map(&map);
-	if (argc == 2)
+	if (argc == 2 && !ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".fdf", 4))
 		map_parser(&map, argv[1]);
 	else
 		return (ft_printf("\033[31m[ERROR]\033[00m	No map given.\n"), 0);
