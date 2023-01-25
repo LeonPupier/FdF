@@ -1,6 +1,8 @@
 # FdF - Fil de Fer
 **42** project number 4 - *This project consists of graphically creating the schematic representation of raised terrain.*
 
+[![lpupier's 42 FdF Score](https://badge42.vercel.app/api/v2/clcup51gq00160fmk4ue0gmbo/project/2903435)](https://github.com/JaeSeoKim/badge42)
+
 ### Important
 This project is only compatible with a **macOS** environment for the moment. indeed, the ***Makefile*** and the ***MiniLibX*** is not currently planned for other platforms.
 
