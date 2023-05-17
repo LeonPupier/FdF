@@ -7,7 +7,7 @@
 This project is only compatible with a **macOS** environment for the moment. indeed, the ***Makefile*** and the ***MiniLibX*** is not currently planned for other platforms.
 
 ### Goal of the project
-Create a program that can take a text file formatted as follows:
+Create a program that can take a text file formatted as follows: 
 ```c
 0 0 0 0 0 0 0 0 0 0
 0 9 0 0 0 9 9 9 0 0
